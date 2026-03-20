@@ -1,0 +1,51 @@
+#version: '3'
+
+services:
+    server:
+        build:
+          context: .
+          dockerfile: Dockerfile-18
+        image: 'postgres:18-alpine-ssl'
+        restart: always
+        ports:
+            - 5432:5432
+        environment:
+            - POSTGRES_USER=adriano
+            - POSTGRES_PASSWORD=example
+            - POSTGRES_DB=my_own_database
+            - POSTGRES_INITDB_ARGS="--data-checksums"
+            - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
+            - ENABLE_SSL=yes
+            - TZ=Europe/Brussels
+        volumes:
+            - data:/var/lib/postgresql/data
+        env_file:
+            - ./variables.env
+
+    adminer:
+        image: 'library/adminer'
+        restart: always
+        ports:
+            - 8080:8080
+
+#    omnidb:
+#        image: 'taivokasper/omnidb'
+#        ports:
+#            - 8082:8080
+#            - 25482:25482
+#        volumes:
+#            - ./omnidb/config.py:/opt/OmniDB-3.0.3b/OmniDB/config.py
+
+    pgadmin:
+        image: 'dpage/pgadmin4'
+        ports:
+            - 5050:5050
+        environment:
+            - PGADMIN_DEFAULT_EMAIL=adriano.guttadauria@umons.ac.be
+            - PGADMIN_DEFAULT_PASSWORD=example
+            - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
+            - PGADMIN_LISTEN_PORT=5050
+
+volumes:
+    data:
+
