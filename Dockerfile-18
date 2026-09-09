@@ -1,27 +1,27 @@
 FROM postgres:18-alpine
 
-COPY ./certs/out/postgres.key /var/lib/postgresql
-COPY ./certs/out/postgres.crt /var/lib/postgresql
+COPY ./certs/out/postgres.key /etc/ssl/postgresql/
+COPY ./certs/out/postgres.crt /etc/ssl/postgresql/
 
-COPY ./certs/out/myCA.crt /var/lib/postgresql
-COPY ./certs/out/myCA.crl /var/lib/postgresql
+COPY ./certs/out/myCA.crt /etc/ssl/postgresql/
+COPY ./certs/out/myCA.crl /etc/ssl/postgresql/
 
 COPY ./ssl-conf.sh /usr/local/bin
 
-RUN chown 0:70 /var/lib/postgresql/postgres.key \
-        && chmod 640 /var/lib/postgresql/postgres.key \
-        && chown 0:70 /var/lib/postgresql/postgres.crt \
-        && chmod 640 /var/lib/postgresql/postgres.crt
+RUN chown 0:70 /etc/ssl/postgresql/postgres.key \
+        && chmod 640 /etc/ssl/postgresql/postgres.key \
+        && chown 0:70 /etc/ssl/postgresql/postgres.crt \
+        && chmod 640 /etc/ssl/postgresql/postgres.crt
 
-RUN chown 0:70 /var/lib/postgresql/myCA.crt \
-        && chmod 640 /var/lib/postgresql/myCA.crt \
-        && chown 0:70 /var/lib/postgresql/myCA.crl \
-        && chmod 640 /var/lib/postgresql/myCA.crl
+RUN chown 0:70 /etc/ssl/postgresql/myCA.crt \
+        && chmod 640 /etc/ssl/postgresql/myCA.crt \
+        && chown 0:70 /etc/ssl/postgresql/myCA.crl \
+        && chmod 640 /etc/ssl/postgresql/myCA.crl
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-CMD [ "-c", "ssl=on" , "-c", "ssl_cert_file=/var/lib/postgresql/postgres.crt", \
-    "-c", "ssl_key_file=/var/lib/postgresql/postgres.key", \
-    "-c", "ssl_ca_file=/var/lib/postgresql/myCA.crt", \
-    "-c", "ssl_crl_file=/var/lib/postgresql/myCA.crl" ]
+CMD [ "-c", "ssl=on" , "-c", "ssl_cert_file=/etc/ssl/postgresql/postgres.crt", \
+    "-c", "ssl_key_file=/etc/ssl/postgresql/postgres.key", \
+    "-c", "ssl_ca_file=/etc/ssl/postgresql/myCA.crt", \
+    "-c", "ssl_crl_file=/etc/ssl/postgresql/myCA.crl" ]
 
