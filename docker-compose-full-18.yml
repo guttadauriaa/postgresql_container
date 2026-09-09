@@ -45,12 +45,16 @@ services:
         environment:
             - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
             - PGADMIN_DEFAULT_PASSWORD_FILE=/run/secrets/pgadmin_password
+            - PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json
             - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
             - PGADMIN_LISTEN_PORT=5050
+        volumes:
+            - ./pgadmin_servers.json:/pgadmin4/servers.json:ro,z
         env_file:
           - .env
         secrets:
             - pgadmin_password
+            - pgpass
 
 volumes:
     data:
@@ -62,3 +66,6 @@ secrets:
   pgadmin_password:
     x-podman.relabel: z
     file: ./secrets/pgadmin_password.txt
+  pgpass:
+    x-podman.relabel: z
+    file: ./secrets/pgpass.txt
