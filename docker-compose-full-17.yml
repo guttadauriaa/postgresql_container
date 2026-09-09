@@ -10,8 +10,8 @@ services:
         ports:
             - 5432:5432
         environment:
-            - POSTGRES_PASSWORD=example
             - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
             - POSTGRES_DB=${POSTGRES_DB}
             - POSTGRES_INITDB_ARGS="--data-checksums"
             - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
@@ -19,6 +19,8 @@ services:
             - TZ=Europe/Brussels
         env_file:
             - .env
+        secrets:
+            - postgres_password
         volumes:
             - data:/var/lib/postgresql/data
 
@@ -41,13 +43,22 @@ services:
         ports:
             - 5050:5050
         environment:
-            - PGADMIN_DEFAULT_PASSWORD=example
             - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
+            - PGADMIN_DEFAULT_PASSWORD_FILE=/run/secrets/pgadmin_password
             - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
             - PGADMIN_LISTEN_PORT=5050
         env_file:
           - .env
+        secrets:
+            - pgadmin_password
 
 volumes:
     data:
 
+secrets:
+  postgres_password:
+    x-podman.relabel: z
+    file: ./secrets/postgres_password.txt
+  pgadmin_password:
+    x-podman.relabel: z
+    file: ./secrets/pgadmin_password.txt
