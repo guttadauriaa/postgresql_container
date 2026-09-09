@@ -10,17 +10,17 @@ services:
         ports:
             - 5432:5432
         environment:
-            - POSTGRES_USER=adriano
             - POSTGRES_PASSWORD=example
-            - POSTGRES_DB=my_own_database
+            - POSTGRES_USER=${POSTGRES_USER}
+            - POSTGRES_DB=${POSTGRES_DB}
             - POSTGRES_INITDB_ARGS="--data-checksums"
             - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
             - ENABLE_SSL=yes
             - TZ=Europe/Brussels
+        env_file:
+            - .env
         volumes:
             - data:/var/lib/postgresql/data
-        env_file:
-            - ./variables.env
 
     adminer:
         image: 'library/adminer'
@@ -41,10 +41,12 @@ services:
         ports:
             - 5050:5050
         environment:
-            - PGADMIN_DEFAULT_EMAIL=adriano.guttadauria@umons.ac.be
             - PGADMIN_DEFAULT_PASSWORD=example
+            - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
             - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
             - PGADMIN_LISTEN_PORT=5050
+        env_file:
+          - .env
 
 volumes:
     data:
