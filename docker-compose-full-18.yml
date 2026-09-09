@@ -57,6 +57,8 @@ volumes:
 
 secrets:
   postgres_password:
+    x-podman.relabel: z
     file: ./secrets/postgres_password.txt
   pgadmin_password:
+    x-podman.relabel: z
     file: ./secrets/pgadmin_password.txt
