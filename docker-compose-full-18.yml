@@ -8,16 +8,17 @@ services:
         ports:
             - 5432:5432
         environment:
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD_FILE=/run/secrets/postgres_password
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_INITDB_ARGS="--data-checksums"
-            - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
-            - PGDATA=/var/lib/postgresql/data/pg_data
-            - TZ=Europe/Brussels
-            - USER_NAME=${USER_NAME}
-            - USER_PASS=/run/secrets/user_password
-            - USER_DB=${USER_DB}
+            POSTGRES_USER: ${POSTGRES_USER}
+            POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
+            POSTGRES_DB: ${POSTGRES_DB}
+            # Force UTF-8 universal (ICU)
+            POSTGRES_INITDB_ARGS: "--locale-provider=icu --icu-locale=fr-BE"
+            POSTGRES_HOST_AUTH_METHOD: scram-sha-256
+            PGDATA: /var/lib/postgresql/data/pg_data
+            TZ: Europe/Brussels
+            USER_NAME: ${USER_NAME}
+            USER_PASS: /run/secrets/user_password
+            USER_DB: ${USER_DB}
         env_file:
             - .env
         secrets:
