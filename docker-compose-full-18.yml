@@ -16,13 +16,19 @@ services:
             - POSTGRES_INITDB_ARGS="--data-checksums"
             - POSTGRES_HOST_AUTH_METHOD=scram-sha-256
             - ENABLE_SSL=yes
+            - PGDATA=/var/lib/postgresql/data/pg_data
             - TZ=Europe/Brussels
+            - USER_NAME=${USER_NAME}
+            - USER_PASS=/run/secrets/user_password
+            - USER_DB=${USER_DB}
         env_file:
             - .env
         secrets:
             - postgres_password
+            - user_password
         volumes:
-            - data:/var/lib/postgresql
+            - data:/var/lib/postgresql/data:z
+            - ./init:/docker-entrypoint-initdb.d:z
 
     adminer:
         image: 'library/adminer'
@@ -67,6 +73,10 @@ secrets:
   pgadmin_password:
     x-podman.relabel: z
     file: ./secrets/pgadmin_password.txt
+  user_password:
+    x-podman.relabel: z
+    file: ./secrets/user_password.txt
+
   pgpass:
     x-podman.relabel: z
     file: ./secrets/pgpass.txt
