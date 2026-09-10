@@ -1,5 +1,7 @@
 FROM postgres:18-alpine
 
+RUN apk add --no-cache icu-data-full icu-libs
+
 COPY ./certs/out/postgres.key /etc/ssl/postgresql/
 COPY ./certs/out/postgres.crt /etc/ssl/postgresql/
 
