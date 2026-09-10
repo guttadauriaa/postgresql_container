@@ -55,7 +55,7 @@ If you change the certificates after having created the image, you must rebuild 
 
 ```bash
 $ docker rmi postgres:18-alpine-ssl 
-$ docker compose up -d
+$ docker compose -f docker-compose-full-18.yml up -d
 ```
 
 
@@ -64,9 +64,9 @@ $ docker compose up -d
 These lines uses the new docker compose plugin (Go version).
 
 ```bash
-$ docker compose build
-$ docker compose up -d
-$ docker compose ps
+$ docker compose -f docker-compose-full-18.yml build
+$ docker compose -f docker-compose-full-18.yml up -d
+$ docker compose -f docker-compose-full-18.yml ps
 ```
 
 You can still use docker-compose command (Python version).
@@ -95,18 +95,12 @@ my_own_database=#
 
 ## Web UI
 
-If you want to use a web interface for interacting with the PostgreSQL server, you can use the docker-compose-with-web-ui.yml file :
+If you want to use a web interface for interacting with the PostgreSQL server, you can use the docker-compose-full-18.yml file :
 
 ```bash
 $ docker compose -f docker-compose-full-18.yml up -d
 $ docker compose -f docker-compose-full-18.yml ps
 ```
-
-## Adminer
-
-When the adminer container is running, you need to go to http://localhost:8080 and fill in the credentials according to your modifications of the environment files.
-
-![Adminer Connection parameters](/media/adminer_connection.png "Connection")**Default parameters**
 
 
 ## pgAdmin
@@ -137,4 +131,10 @@ Now that the essential settings are in place, click on the Save button to add th
 
 ![pgAdmin You are connected](/media/pgadmin_connected.png "Connected")**You should be connected to the SQL server**
 
+
+## Adminer
+
+When the adminer container is running, you need to go to http://localhost:8080 and fill in the credentials according to your modifications of the environment files.
+
+![Adminer Connection parameters](/media/adminer_connection.png "Connection")**Default parameters**
 
