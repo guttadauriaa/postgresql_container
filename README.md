@@ -8,17 +8,18 @@ This image is build upon the official PostgreSQL Alpine image for enabling SSL/T
 
 You can modify the .env file to change parameters like :
 
-* **POSTGRES_USER** The desired username.
-* **POSTGRES_DB** The name of the associated database.
-* **PGADMIN_DEFAULT_EMAIL** The email address used as account in pgAdmin.
+* **POSTGRES_USER** The desired username for the postgres administrator.
+* **POSTGRES_DB** The name of the associated database, keep the same name as **\$POSTGRES_USER**.
+* **USER_NAME** The name of a simple user with no special permissions.
+* **USER_DB** The name of the associated database, keep the same name as **\$USER_NAME**. ('user' is not allowed)
+* **PGADMIN_DEFAULT_EMAIL** The email address used as login with pgAdmin.
 * **PGADMIN_REPLACE_SERVERS_ON_STARTUP** Whether or not you want to force the creation of the connection setup in pgAdmin.
 
 If you change PostgreSQL variables, **you must** modify the secrets files :
 
-* **secrets/postgres_password.txt** password used for **\$POSTGRES_USER** on **\$POSTGRES_DB**
 * **secrets/pgadmin_password.txt** password used for the account **\$PGADMIN_DEFAULT_EMAIL** in pgAdmin.
-* **secrets/pgpass.txt** connection string.
-* **pgadmin_servers.json** the json file used to add the connection settings in pgAdmin.
+* **secrets/postgres_password.txt** password used for **\$POSTGRES_USER** on **\$POSTGRES_DB**.
+* **secrets/user_password.txt** password used for **\$USER_NAME account on **\$USER_DB**.
 
 
 ### Generating the certificates with certstrap
@@ -28,6 +29,8 @@ Some default self-signed TLS certificates have been created and bundle in this r
 If you want to generate your own :
 
 First, you need to create self-signed CA and certificates using [certstrap](https://github.com/square/certstrap) from the certs folder.
+
+You can download a compiled binary from the Github Release page.
 
 To build this utility, you need the Go compiler in version 1.18+.
 
