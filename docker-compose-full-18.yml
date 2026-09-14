@@ -50,16 +50,16 @@ services:
             - PGADMIN_DEFAULT_EMAIL=${PGADMIN_DEFAULT_EMAIL}
             - PGADMIN_DEFAULT_PASSWORD_FILE=/run/secrets/pgadmin_password
             - PGADMIN_REPLACE_SERVERS_ON_STARTUP=${PGADMIN_REPLACE_SERVERS_ON_STARTUP}
-            - PGADMIN_SERVER_JSON_FILE=/pgadmin4/servers.json
+            - PGADMIN_SERVER_JSON_FILE=/tmp/servers.json
             - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
             - PGADMIN_LISTEN_PORT=5050
         volumes:
-            - ./pgadmin_servers.json:/pgadmin4/servers.json:ro,z
+            - ./pgadmin/gen_servers.sh:/gen_servers.sh:ro,z
+        entrypoint: /bin/sh -c "/gen_servers.sh && /entrypoint.sh"
         env_file:
           - .env
         secrets:
             - pgadmin_password
-            - pgpass
 
 volumes:
     data:
@@ -75,6 +75,3 @@ secrets:
     x-podman.relabel: z
     file: ./secrets/user_password.txt
 
-  pgpass:
-    x-podman.relabel: z
-    file: ./secrets/pgpass.txt
