@@ -38,15 +38,15 @@ To build this utility, you need the Go compiler in version 1.18+.
 $ git clone https://github.com/square/certstrap
 $ cd certstrap
 $ go build
-$ cp certs /usr/local/bin/
+$ cp certstrap /usr/local/bin/
 ```
 
 Copy the compiled binary **certstrap** in a folder present in your $PATH.
 
-Now, you can run the script create-certificates.sh in the certs folder :
+Now, you can return to the postgresql_container directory and run the script create-certificates.sh in the certs folder :
 
 ```bash
-$ cd certs/ 
+$ cd ../certs/ 
 $ ./create-certificates.sh
 ```
 
