@@ -1,3 +1,4 @@
+*.sh text eol=lf
 media/pgadmin_register_server_3.png filter=lfs diff=lfs merge=lfs -text
 media/pgadmin_welcome.png filter=lfs diff=lfs merge=lfs -text
 media/adminer_connection.png filter=lfs diff=lfs merge=lfs -text
