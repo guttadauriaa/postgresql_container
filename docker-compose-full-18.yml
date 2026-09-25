@@ -52,6 +52,9 @@ services:
             - PGADMIN_REPLACE_SERVERS_ON_STARTUP=${PGADMIN_REPLACE_SERVERS_ON_STARTUP}
             - PGADMIN_SERVER_JSON_FILE=/tmp/servers.json
             - PGADMIN_CONFIG_ENHANCED_COOKIE_PROTECTION=True
+            - PGADMIN_CONFIG_MAX_LOGIN_ATTEMPTS=15
+            # 5 min ban time when failing to authentify
+            - PGADMIN_CONFIG_LOGIN_BANNER_TIMEOUT="0.083"
             - PGADMIN_LISTEN_PORT=5050
         volumes:
             - ./pgadmin/gen_servers.sh:/gen_servers.sh:ro,z
