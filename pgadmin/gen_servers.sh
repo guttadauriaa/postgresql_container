@@ -8,11 +8,8 @@ EOF
   chmod 600 /var/lib/pgadmin/pgpass
 fi
 
-# Using sed (gnu)
-DISPLAY_NAME=$(echo "$USER_NAME" | sed 's/\b\(.\)/\U\1/g')
-
 # More portable with awk
-DISPLAY_NAME2=$(echo "$USER_NAME" | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}')
+DISPLAY_NAME=$(echo "$USER_NAME" | awk '{for(i=1;i<=NF;i++) $i=toupper(substr($i,1,1)) substr($i,2); print}')
 
 if [ ! -f /tmp/servers.json ]; then
   cat > /tmp/servers.json <<EOF
