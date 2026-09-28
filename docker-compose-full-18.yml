@@ -61,8 +61,8 @@ services:
             - PGADMIN_CONFIG_LOGIN_BANNER_TIMEOUT="0.083"
             - PGADMIN_LISTEN_PORT=5050
         volumes:
-            - ./certs/out/localhost.crt:/certs/server.cert:ro,z
-            - ./certs/out/localhost.key:/certs/server.key:ro,z
+            - ./certs/out/pgadmin.crt:/certs/server.cert:ro,z
+            - ./certs/out/pgadmin.key:/certs/server.key:ro,z
             - ./pgadmin/gen_servers.sh:/gen_servers.sh:ro,z
             - pgadmin_data:/var/lib/pgadmin:z
         entrypoint: /bin/sh -c "/bin/sh /gen_servers.sh && exec /entrypoint.sh"

@@ -15,5 +15,7 @@ echo "Don't set a password for the certificate request"
 certstrap request-cert --common-name postgres --domain localhost --domain postgres-server
 
 echo "Signing the request and generating the certificate."
-certstrap sign postgres --CA myCA
+certstrap request-cert --common-name pgadmin --domain localhost --domain pgadmin
 
+certstrap sign postgres --CA myCA
+certstrap sign pgadmin  --CA myCA
