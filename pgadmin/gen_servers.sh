@@ -2,8 +2,8 @@
 
 if [ ! -f /var/lib/pgadmin/pgpass ]; then
   cat > /var/lib/pgadmin/pgpass <<EOF
-  server:5432:*:${POSTGRES_USER}:${PGADMIN_DEFAULT_PASSWORD_FILE}
-  server:5432:${USER_DB}:${USER_NAME}:${USER_PASS}
+server:5432:*:${POSTGRES_USER}:${PGADMIN_DEFAULT_PASSWORD_FILE}
+server:5432:${USER_DB}:${USER_NAME}:${USER_PASS}
 EOF
   chmod 600 /var/lib/pgadmin/pgpass
 fi
