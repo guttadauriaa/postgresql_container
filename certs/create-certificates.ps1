@@ -8,9 +8,14 @@ Write-Host "`nRequires Go version 1.18+"
 Write-Host "Initializing a local Certificate Authority."
 certstrap init --common-name myCA
 
-Write-Host "Requesting a certificate and its keypair."
-Write-Host "Don't set a password for the certificate request"
+Write-Host "Don't set a password for the certificate requests."
+
+Write-Host "Requesting a certificate and its keypair for postgres :"
 certstrap request-cert --common-name postgres --domain localhost --domain postgres-server
 
-Write-Host "Signing the request and generating the certificate."
+Write-Host "Requesting a certificate and its keypair for pgadmin :"
+certstrap request-cert --common-name pgadmin --domain localhost --domain pgadmin
+
+Write-Host "Signing the requests and generating the certificate."
 certstrap sign postgres --CA myCA
+certstrap sign pgadmin  --CA myCA
