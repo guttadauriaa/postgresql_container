@@ -11,7 +11,7 @@ COPY ./certs/out/postgres.crt /var/lib/postgresql
 COPY ./certs/out/myCA.crt /var/lib/postgresql
 COPY ./certs/out/myCA.crl /var/lib/postgresql
 
-COPY ./ssl-conf.sh /usr/local/bin
+COPY ./postgres/ssl-conf.sh /usr/local/bin
 
 RUN chown 0:70 /var/lib/postgresql/postgres.key \
         && chmod 640 /var/lib/postgresql/postgres.key \

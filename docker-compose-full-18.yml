@@ -32,7 +32,7 @@ services:
             - user_password
         volumes:
             - data:/var/lib/postgresql/data:z
-            - ./init:/docker-entrypoint-initdb.d:z
+            - ./postgres/init:/docker-entrypoint-initdb.d:z
 
     pgadmin:
         image: 'dpage/pgadmin4'
