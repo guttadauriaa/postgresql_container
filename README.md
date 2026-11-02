@@ -19,7 +19,7 @@ If you change PostgreSQL variables, **you must** modify the secrets files :
 
 * **secrets/pgadmin_password.txt** password used for the account **\$PGADMIN_DEFAULT_EMAIL** in pgAdmin.
 * **secrets/postgres_password.txt** password used for **\$POSTGRES_USER** on **\$POSTGRES_DB**.
-* **secrets/user_password.txt** password used for **\$USER_NAME account on **\$USER_DB**.
+* **secrets/user_password.txt** password used for **\$USER_NAME** account on **\$USER_DB**.
 
 
 ### Generating the certificates with certstrap
@@ -61,6 +61,7 @@ $ docker rmi postgres:18-alpine-ssl
 $ docker compose -f docker-compose-full-18.yml up -d
 ```
 
+There is also a ps1 script for use with PowerShell on Windows.
 
 ## Run and build
 
@@ -82,18 +83,18 @@ Direct connection using your local psql client. (Use only if it is installed on 
 You may need to adapt the connection string if you modified it.
 
 ```sh
-$ psql postgresql://adriano@localhost:5432/my_own_database
+$ psql postgresql://pglab@localhost:5432/pglab_database
 ```
 
 Output :
 
 ```
-Mot de passe pour l'utilisateur adriano :
+Mot de passe pour l'utilisateur pglab :
 psql (15.1, serveur 13.11)
 Connexion SSL (protocole : TLSv1.3, chiffrement : TLS_AES_256_GCM_SHA384, compression : désactivé)
 Saisissez « help » pour l'aide.
 
-my_own_database=#
+pglab_database=#
 ```
 
 ## Web UI
@@ -133,11 +134,4 @@ It is in *prefer* mode by default.
 Now that the essential settings are in place, click on the Save button to add the server and initialize the connection :
 
 ![pgAdmin You are connected](/media/pgadmin_connected.png "Connected")**You should be connected to the SQL server**
-
-
-## Adminer
-
-When the adminer container is running, you need to go to http://localhost:8080 and fill in the credentials according to your modifications of the environment files.
-
-![Adminer Connection parameters](/media/adminer_connection.png "Connection")**Default parameters**
 
