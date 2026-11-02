@@ -16,6 +16,10 @@ certstrap request-cert --common-name postgres --domain localhost --domain postgr
 Write-Host "Requesting a certificate and its keypair for pgadmin :"
 certstrap request-cert --common-name pgadmin --domain localhost --domain pgadmin
 
+Write-Host "Requesting a certificate and its keypair for web :"
+certstrap request-cert --common-name web --domain localhost
+
 Write-Host "Signing the requests and generating the certificate."
 certstrap sign postgres --CA myCA
 certstrap sign pgadmin  --CA myCA
+certstrap sign web      --CA myCA

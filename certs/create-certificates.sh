@@ -41,6 +41,11 @@ echo -e "\n${GREEN}Requesting a certificate and its keypair for pgadmin :${NC}"
 echo -e "Don't set a password for the certificate request\n"
 certstrap request-cert --common-name pgadmin --domain localhost --domain pgadmin
 
+echo -e "\n${GREEN}Requesting a certificate and its keypair for web :${NC}"
+echo -e "Don't set a password for the certificate request\n"
+certstrap request-cert --common-name web --domain localhost
+
 echo -e "\n${GREEN}Signing the request and generating the certificate.${NC}\n"
 certstrap sign postgres --CA myCA
 certstrap sign pgadmin  --CA myCA
+certstrap sign web      --CA myCA
