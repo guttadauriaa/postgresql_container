@@ -2,8 +2,8 @@
 
 if [ ! -f /var/lib/pgadmin/pgpass ]; then
   cat > /var/lib/pgadmin/pgpass <<EOF
-server:5432:*:${POSTGRES_USER}:${PGADMIN_DEFAULT_PASSWORD_FILE}
-server:5432:${USER_DB}:${USER_NAME}:${USER_PASS}
+postgres:5432:*:${POSTGRES_USER}:${PGADMIN_DEFAULT_PASSWORD_FILE}
+postgres:5432:${USER_DB}:${USER_NAME}:${USER_PASS}
 EOF
   chmod 600 /var/lib/pgadmin/pgpass
 fi
@@ -18,7 +18,7 @@ if [ ! -f /tmp/servers.json ]; then
       "1": {
         "Name": "Postgres (admin)",
         "Group": "Servers",
-        "Host": "server",
+        "Host": "postgres",
         "Port": 5432,
         "MaintenanceDB": "${POSTGRES_DB}",
         "Username": "${POSTGRES_USER}",
@@ -28,7 +28,7 @@ if [ ! -f /tmp/servers.json ]; then
       "2": {
         "Name": "${DISPLAY_NAME}",
         "Group": "Servers",
-        "Host": "server",
+        "Host": "postgres",
         "Port": 5432,
         "MaintenanceDB": "${USER_DB}",
         "Username": "${USER_NAME}",

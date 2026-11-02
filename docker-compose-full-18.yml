@@ -1,5 +1,5 @@
 services:
-    server:
+    postgres:
         build:
           context: .
           dockerfile: Dockerfile-18
@@ -62,6 +62,8 @@ services:
           - .env
         secrets:
             - pgadmin_password
+        depends_on:
+            - postgres
 
 volumes:
     data:
