@@ -12,7 +12,13 @@ services:
             POSTGRES_PASSWORD_FILE: /run/secrets/postgres_password
             POSTGRES_DB: ${POSTGRES_DB}
             # Force UTF-8 universal (ICU)
-            POSTGRES_INITDB_ARGS: "--locale-provider=icu --icu-locale=fr-BE"
+            POSTGRES_INITDB_ARGS: >
+              --locale-provider=icu
+              --icu-locale=fr-BE
+              --lc-time=fr_FR.UTF-8
+              --lc-numeric=fr_FR.UTF-8
+              --lc-messages=fr_FR.UTF-8
+              --lc-monetary=fr_FR.UTF-8
             POSTGRES_HOST_AUTH_METHOD: scram-sha-256
             PGDATA: /var/lib/postgresql/data/pg_data
             TZ: Europe/Brussels
