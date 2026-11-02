@@ -97,20 +97,31 @@ Saisissez « help » pour l'aide.
 pglab_database=#
 ```
 
-## Web UI
+You may also run it from inside the PostgreSQL container like this :
 
-If you want to use a web interface for interacting with the PostgreSQL server, you can use the docker-compose-full-18.yml file :
 
-```bash
-$ docker compose -f docker-compose-full-18.yml up -d
-$ docker compose -f docker-compose-full-18.yml ps
+```sh
+$ docker compose -f docker-compose-full-18.yml exec server psql postgresql://pglab@localhost:5432/pglab_database
+
+psql (18.6)
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, compression: off, ALPN: postgresql)
+Type "help" for help.
+
+pglab_database=>
 ```
 
 
-## pgAdmin
+## Web UI with pgAdmin4
 
-pgAdmin is accessible at http://localhost:5050, enter the credentials as described in the docker-compose-with-web-ui.yml file :
+If you want to use a web interface for interacting with the PostgreSQL server, pgAdmin4 is listening on localhost port 5050.
 
+Use the email address defined in **PGADMIN_DEFAULT_EMAIL** and the password from **secret/pgadmin_password.txt** file.
+
+```
+Default URL     : https://localhost:5050/
+Default address : pglab@umons.ac.be
+Default password: pgchangeme
+```
 ![pgAdmin Welcome Screen](/media/pgadmin_welcome.png "pgAdmin")**Welcome Screen**
 
 Afterwards, we need to register a server configuration. Click on the "Add New Server" in the quick links section :
