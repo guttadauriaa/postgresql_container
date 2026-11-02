@@ -28,20 +28,6 @@ services:
             - data:/var/lib/postgresql/data:z
             - ./init:/docker-entrypoint-initdb.d:z
 
-    adminer:
-        image: 'library/adminer'
-        restart: always
-        ports:
-            - 8080:8080
-
-#    omnidb:
-#        image: 'taivokasper/omnidb'
-#        ports:
-#            - 8082:8080
-#            - 25482:25482
-#        volumes:
-#            - ./omnidb/config.py:/opt/OmniDB-3.0.3b/OmniDB/config.py
-
     pgadmin:
         image: 'dpage/pgadmin4'
         ports:
