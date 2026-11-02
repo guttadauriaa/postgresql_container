@@ -1,5 +1,10 @@
 FROM postgres:17-alpine
 
+RUN apk add --no-cache icu-data-full icu-libs musl-locales musl-locales-lang
+
+ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl
+ENV LANG=fr_FR.UTF-8
+
 COPY ./certs/out/postgres.key /var/lib/postgresql
 COPY ./certs/out/postgres.crt /var/lib/postgresql
 
