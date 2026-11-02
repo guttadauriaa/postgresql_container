@@ -75,6 +75,16 @@ $ docker compose -f docker-compose-full-18.yml ps
 
 You can still use docker-compose command (Python version).
 
+Beware that database files and configuration are persisted inside a docker volume !
+
+To restart anew, you must delete the volume and your database :
+
+```bash
+$ docker compose -f docker-compose-full-18.yml stop
+$ docker compose -f docker-compose-full-18.yml down
+$ docker volume prune
+```
+
 
 ## Connection to your database
 
@@ -115,34 +125,31 @@ pglab_database=>
 
 If you want to use a web interface for interacting with the PostgreSQL server, pgAdmin4 is listening on localhost port 5050.
 
-Use the email address defined in **PGADMIN_DEFAULT_EMAIL** and the password from **secret/pgadmin_password.txt** file.
+![pgAdmin Welcome Screen](/media/pgadmin_welcome.png "pgAdmin")**Welcome Screen**
+
+Use the email address defined in **PGADMIN_DEFAULT_EMAIL** and the password \
+from +**secret/pgadmin_password.txt**+ file.
 
 ```
 Default URL     : https://localhost:5050/
 Default address : pglab@umons.ac.be
 Default password: pgchangeme
 ```
-![pgAdmin Welcome Screen](/media/pgadmin_welcome.png "pgAdmin")**Welcome Screen**
 
-Afterwards, we need to register a server configuration. Click on the "Add New Server" in the quick links section :
+Once logged in, you should see the configured connections in the left sidebar :
 
-![pgAdmin We are logged in](/media/pgadmin_logged_in.png "pgAdmin")**Adding a new server**
+![pgAdmin You are logged in](/media/pgadmin_logged_in.png "pgAdmin: Server List")**Server List**
 
-A pop up will appear, set a name in the first tab named ***General*** :
 
-![pgAdmin Register Server - General](/media/pgadmin_register_server_1.png "Register New Server")**General**
+The two PostgreSQL databases are configured when creating the containers using variables and scripts.
 
-In the ***Connection*** tab, set the parameters as follow unless you modified the configuration :
+You will find :
 
-![pgAdmin Register Server - Connection](/media/pgadmin_register_server_2.png "Connection Credentials")**Connection**
+* **pglab** : for a normal user (pglab),
+* **postgres** : for the database administrator (postgres).
 
-In the ***Parameters*** tab, you can set **SSL mode** to *require* :
-
-![pgAdmin Register Server - Parameters](/media/pgadmin_register_server_3.png "Connection Parameters")**Parameters**
-
-It is in *prefer* mode by default.
-
-Now that the essential settings are in place, click on the Save button to add the server and initialize the connection :
+As previously mentioned, the passwords are in the secrets directory.
 
 ![pgAdmin You are connected](/media/pgadmin_connected.png "Connected")**You should be connected to the SQL server**
 
+The Query Editor will be available by right clicking on the name of the database, for example : pglab_database.
