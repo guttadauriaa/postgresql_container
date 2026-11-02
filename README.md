@@ -128,7 +128,7 @@ If you want to use a web interface for interacting with the PostgreSQL server, p
 ![pgAdmin Welcome Screen](/media/pgadmin_welcome.png "pgAdmin")**Welcome Screen**
 
 Use the email address defined in **PGADMIN_DEFAULT_EMAIL** and the password \
-from +**secret/pgadmin_password.txt**+ file.
+from **secret/pgadmin_password.txt** file.
 
 ```
 Default URL     : https://localhost:5050/
@@ -141,7 +141,7 @@ Once logged in, you should see the configured connections in the left sidebar :
 ![pgAdmin You are logged in](/media/pgadmin_logged_in.png "pgAdmin: Server List")**Server List**
 
 
-The two PostgreSQL databases are configured when creating the containers using variables and scripts.
+The two PostgreSQL databases are already configured at the creation of the pgAdmin container using variables and scripts.
 
 You will find :
 
@@ -150,6 +150,7 @@ You will find :
 
 As previously mentioned, the passwords are in the secrets directory.
 
-![pgAdmin You are connected](/media/pgadmin_connected.png "Connected")**You should be connected to the SQL server**
+![pgAdmin You are connected](/media/pgadmin_connected.png "Connected")**You should be connected to the SQL database**
 
 The Query Editor will be available by right clicking on the name of the database, for example : pglab_database.
+
