@@ -1,6 +1,10 @@
 FROM postgres:18-alpine
 
-RUN apk add --no-cache icu-data-full icu-libs musl-locales musl-locales-lang
+RUN apk add --no-cache \
+    icu-data-full \
+    icu-libs \
+    musl-locales \
+    musl-locales-lang
 
 ENV MUSL_LOCPATH=/usr/share/i18n/locales/musl
 ENV LANG=fr_FR.UTF-8
@@ -25,7 +29,8 @@ RUN chown 0:70 /etc/ssl/postgresql/myCA.crt \
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
-CMD [ "-c", "ssl=on" , "-c", "ssl_cert_file=/etc/ssl/postgresql/postgres.crt", \
+CMD [ "-c", "ssl=on", \
+    "-c", "ssl_cert_file=/etc/ssl/postgresql/postgres.crt", \
     "-c", "ssl_key_file=/etc/ssl/postgresql/postgres.key", \
     "-c", "ssl_ca_file=/etc/ssl/postgresql/myCA.crt", \
     "-c", "ssl_crl_file=/etc/ssl/postgresql/myCA.crl" ]
