@@ -100,11 +100,11 @@ Output :
 
 ```
 Mot de passe pour l'utilisateur pglab :
-psql (15.1, serveur 13.11)
-Connexion SSL (protocole : TLSv1.3, chiffrement : TLS_AES_256_GCM_SHA384, compression : désactivé)
+psql (18.6)
+Connexion SSL (protocole : TLSv1.3, chiffrement : TLS_AES_256_GCM_SHA384, compression : désactivé, ALPN : postgresql)
 Saisissez « help » pour l'aide.
 
-pglab_database=#
+pglab_database=>
 ```
 
 You may also run it from inside the PostgreSQL container like this :
@@ -120,6 +120,8 @@ Type "help" for help.
 pglab_database=>
 ```
 
+> [!IMPORTANT]
+> You must use the password of the pglab user for pglab_database, not the one used to log in to pgAdmin.
 
 ## Web UI with pgAdmin4
 
