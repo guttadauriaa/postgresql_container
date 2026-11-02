@@ -65,6 +65,22 @@ services:
         depends_on:
             - postgres
 
+    web:
+      build:
+        context: .
+        dockerfile: Dockerfile-php
+      image: 'php:8.5-apache-pgsql'
+      restart: always
+      ports:
+        - "8000:80"
+        - "8443:443"
+      volumes:
+        - ./src:/var/www/html:z
+        - ./certs/out/web.crt:/etc/ssl/certs/localhost.crt:ro,z
+        - ./certs/out/web.key:/etc/ssl/private/localhost.key:ro,z
+      depends_on:
+        - postgres
+
 volumes:
     data:
     pgadmin_data:
