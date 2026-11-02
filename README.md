@@ -156,3 +156,17 @@ As previously mentioned, the passwords are in the secrets directory.
 
 The Query Editor will be available by right clicking on the name of the database, for example : pglab_database.
 
+## Web Server (Apache2) with PHP 8.5 support
+
+A web server is accessible at :
+
+* http://localhost:8000/
+* https://localhost:8443/
+
+You can put your PHP files inside the ./src/ directory.
+
+By default, the index.php file will display the active PHP configuration of the web server.
+
+You can see on this page that PostgreSQL is supported.
+
+
